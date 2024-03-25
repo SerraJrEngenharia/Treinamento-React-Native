@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "telaTreinamento",
-    "slug": "telaTreinamento",
+    "name": "Treinamento-React-Native",
+    "slug": "Treinamento-React-Native",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
