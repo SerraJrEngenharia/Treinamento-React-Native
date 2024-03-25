@@ -6,31 +6,43 @@ export default function App() {
   const [info, setInfo] = useState('');
 
   async function logMusic () {
-    const response = await fetch("https://lyric.mackle.im/api?artist=" + artista);
-    const music = await response.json();
-    console.log(music);
-    setInfo(music.info);
+    try {
+      const response = await fetch("https://lyric.mackle.im/api?artist=" + artista);
+      const music = await response.json();
+      if (music.status === 500) throw new Error("Erro!");
+      console.log(music);
+      setInfo(music.info);
+    } catch (error) {
+      alert("Ocorreu algum erro na busca pelo artista! Tente novamente.")
+      setInfo('')
+    }
   }
   
-
   return (
     <View style={styles.container}>
+
       <View style={styles.titleContainer}>
         <Text style={styles.textoTitle}>Artist And Music</Text>
       </View>
+
       <View style={styles.inputContainer}>
-        <TextInput style={styles.input} placeholder='Nome do Artista' onChangeText={(texto) => setArtista(texto)}></TextInput>
+        <TextInput style={styles.input}
+          placeholder='Nome do Artista'
+          onChangeText={(texto) => setArtista(texto)}>
+        </TextInput>
         <TouchableOpacity onPress={() => logMusic()}>
           <View style={styles.button}>
             <Text style={styles.textoButton}>Buscar</Text>
           </View>
         </TouchableOpacity>
       </View>
+
       <View style={styles.artistContainer}>
         <Image height={150} width={150} source={{uri: info.image}}></Image>
-        <Text style={styles.texto}>Título: {info.title}</Text>
-        <Text style={styles.texto}>Letra: {info.lyrics}</Text>
+        <Text style={styles.texto}>{(info.title) ? ('Título: ' + info.title) : ('')}</Text>
+        <Text style={styles.texto}>{(info.lyrics) ? ('Letra: ' + info.lyrics) : ('')}</Text>
       </View>
+
     </View>
   );
 }
@@ -38,29 +50,26 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: 'black',
   },
   titleContainer: {
     flex: 1,
-    // backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
   },
   inputContainer: {
     flex: 2,
-    // backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
   },
   artistContainer: {
-    flex: 2,
+    flex: 3,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    // backgroundColor: 'yellow',
-    textAlign: 'center',
+    textAlign: 'justify',
   },
   textoTitle: {
     color: 'white',
@@ -70,6 +79,8 @@ const styles = StyleSheet.create({
   texto: {
     color: 'white',
     fontSize: 20,
+    textAlign: 'center',
+    marginTop: 10,
   },
   textoButton: {
     color: 'white',
@@ -79,8 +90,10 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: 'white',
     marginTop: 10,
-    paddingRight: 20,
-    paddingLeft: 20,
+    paddingRight: 30,
+    paddingLeft: 30,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   button: {
     backgroundColor: 'purple',
