@@ -1,5 +1,4 @@
 import { StatusBar } from "expo-status-bar";
-// @ts-expect-error
 import { useState, useEffect } from "react";
 import { Image, Text } from "react-native";
 
@@ -17,6 +16,7 @@ export default function App() {
 
     } catch (error) {
       alert(`Houve um problema.\n\nO artista '${artist}' não foi encontrado.`); // Exibe um alerta pop-up com o erro.
+      setArtistName('')
     }
   };
 
