@@ -28,11 +28,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.cardCompleto}>
+    <View style={styles.container}> 
+
+      <View style={[styles.card, {paddingTop: -10, borderTopLeftRadius:0, borderTopRightRadius:0}]}>
         <Text style={styles.titulo}>App.fy</Text>
 
-        <View style={styles.caixaPesquisa}>
+        <View style={{flexDirection: 'row'}}>
           <TextInput style={styles.inputStyle} placeholder="Digite aqui" onChangeText={(text) => setInput(text)} />
           <TouchableOpacity style={styles.botao} onPress={searchMusic}>
             <View>
@@ -40,30 +41,37 @@ export default function App() {
             </View>
           </TouchableOpacity>
         </View>
-
-        <View style={styles.cardMeio}>
-          {carregando ? <ActivityIndicator /> : (
-            <FlatList 
-              data={dados} 
-              renderItem={({ item }) => (
-                <View style={styles.item}>
-                    <Image source={{ uri: item.image }} style={styles.fotoAlbum} /> 
-                    <Text style={styles.letra}>Titulo</Text>
-                    <View style={[styles.cardMeio, {backgroundColor: '#C0C0C0', width: 310, marginTop: 5}]}>
-                      <Text style={styles.letra}> {item.title}</Text>
-                    </View>
-
-                    <Text style={styles.letra}>Letra</Text>
-                    <View style={[styles.cardMeio, {backgroundColor: '#C0C0C0', width: 310, marginTop: 5}]}>
-                      <Text style={styles.letra} numberOfLines={null}>{item.lyrics}</Text>
-                    </View>
-                </View>
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            /> 
-          )}
-        </View>
       </View>
+
+      <View >
+        {carregando ? <ActivityIndicator /> : (
+          <FlatList 
+            style = {styles.flatList}
+            data={dados} 
+            renderItem={({ item }) => (
+
+            <View style={[styles.card, {backgroundColor: '#000000', marginTop: 20}]}>
+              <Image source={{ uri: item.image }} style={styles.fotoAlbum} /> 
+
+              <View>
+                <Text style={[styles.texto, {marginLeft: 17, marginTop: 12, marginBottom: 7}]}>Titulo</Text>
+                <View style={styles.cardLetra}>
+                  <Text style={[styles.texto, {color: '#ffffff', fontSize: 16}]}>{item.title}</Text>
+                </View>
+
+                <Text style={[styles.texto, {marginLeft: 17, marginTop: 12, marginBottom: 7}]}>Letra</Text>
+                <View style={styles.cardLetra}>
+                  <Text style={[styles.texto, {color: '#ffffff', fontSize: 16}]}>{item.lyrics}</Text>
+                </View>                    
+              </View>
+            </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          /> 
+        )}
+      </View>
+      
+      
       <StatusBar style="auto" />
     </View>
   );
@@ -72,63 +80,69 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 25,
     alignItems: 'center',
-    backgroundColor: '#2F4F4F',
+    backgroundColor: '#111111',
+  },
+  barraSuperior: {
+    width: '100%',
+    height: 45,
+    backgroundColor: '#ffffff',
   },
   titulo:{
     fontSize: 30,
     fontWeight: 'bold',
-    margin: 10,
+    marginBottom :10,
+    marginTop: 45,
   },
-  cardCompleto:{
-    backgroundColor: '#11d437',
+  texto: {
+    fontSize: 17,
+    color: '#696969',
+    fontWeight: 'bold',
+  },
+  card:{
+    width: '100%',
     alignItems: 'center',
-    height: 650,
+    padding: 15,
     borderRadius: 20,
-    width: 380,
+    backgroundColor: '#00FF00',
+  },
+  cardLetra: {
+    width: 350,
+    alignItems: 'left',
+    padding: 10,
+    marginLeft: 10,
+    borderRadius: 20,
+    backgroundColor: '#808080',
+    borderRadius: 10
   },
   inputStyle: {
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     width: 300,
-    height: 40,
+    height: 30,
     borderRadius: 20,
     paddingLeft: 20,
-  },
-  cardMeio: {
-    padding: 12,
-    backgroundColor: '#ffff',
-    borderRadius: 20,
-    marginTop: 15,
-    width: 350,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   botao: {
     backgroundColor: '#ffff',
     borderRadius: 20,
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     marginLeft: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  item: {
-    alignItems: 'center',
-  },
   fotoAlbum: {
-    width: 320,
-    height: 320,
+    width: 350,
+    height: 350,
     borderRadius: 18,
   },
-  letra: {
-    fontSize: 16,
-  },
-  caixaPesquisa: {
-    flexDirection: 'row',
-  },
   fotoSearch: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
+  },
+  flatList:{
+    flex:1,
+    width: '100%',
+    
   }
 });
