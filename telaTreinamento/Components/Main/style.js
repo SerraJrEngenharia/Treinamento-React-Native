@@ -8,7 +8,7 @@ export const ViewContainer = styled.View`
 
 export const Scroll = styled.ScrollView`
     flex: 1;
-    padding-top: 30px;
+    padding-top: 25px;
     width: 100%;
 `;
 
@@ -32,7 +32,7 @@ export const Botao = styled.TouchableOpacity`
 `;
 export const Pesquisa = styled.View`
     flex-direction: row;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 `;
 
 export const Img = styled.Image`
