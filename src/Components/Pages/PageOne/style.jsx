@@ -5,8 +5,8 @@ import styled from 'styled-components/native'
 export const Container = styled.View`
     align-items: center;
     background-color: #111111;
+    flex: 1;
 `
-
 
 export const Titulo = styled.Text`
     font-size: 30px;
@@ -28,7 +28,7 @@ export const FotoSearch = styled.Image`
 
 export const CardCima = styled.View`
     width: 100%;
-    height: 25%;
+    height: 120px;
     align-items: center;
     padding: 15px;
     border-radius: 20px;
@@ -37,7 +37,8 @@ export const CardCima = styled.View`
     background-color: #00FF00;
 `
 export const CardBaixo = styled.View`
-    height: 90%;
+    width: 100%;
+    flex: 1;
 `
 
 export const CardArtista = styled.View`
@@ -76,7 +77,7 @@ export const InputStyle = styled.TextInput`
     padding-left: 20px;
 `
 
-export const Botao = styled.TouchableOpacity`
+export const BotaoSearch = styled.TouchableOpacity`
     background-color: #ffff;
     border-radius: 20px;
     width: 30px;
@@ -100,4 +101,9 @@ export const Texto = styled.Text`
     font-size: 16px;
     color: #ffffff;
     font-weight: bold;
+`
+
+export const BotaoPagina = styled.Text`
+    font-size: 16px;
+    color: #b9b5b594;
 `

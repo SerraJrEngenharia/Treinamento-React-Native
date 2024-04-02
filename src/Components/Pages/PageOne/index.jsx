@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import img from '../../assets/search.png'
+import img from '../../../assets/search.png'
+
 
 import { Container, Titulo, CardCima, InputStyle, FotoSearch, 
-    CardTextTop, Botao, CardBaixo, FlatList, CardArtista, FotoAlbum, 
-    CardLetra, TituloArtista, Texto } from './style'
+    CardTextTop, BotaoSearch, CardBaixo, FlatList, CardArtista, FotoAlbum, 
+    CardLetra, TituloArtista, Texto, BotaoPagina } from './style'
 import { ActivityIndicator } from 'react-native';
 
 export default function PageOne(){
@@ -32,16 +33,20 @@ export default function PageOne(){
         )
     }
 
+
+
     return(
         <Container>
             <CardCima>
+                <CardTextTop>
                 <Titulo> App.fy</Titulo>
+                </CardTextTop>
 
                 <CardTextTop>
                     <InputStyle placeholder="Digite aqui" onChangeText={(text) => setInput(text)}/>
-                    <Botao onPress={searchMusic}>
+                    <BotaoSearch onPress={searchMusic}>
                         <FotoSearch source={img}/>
-                    </Botao>
+                    </BotaoSearch>
                 </CardTextTop>
 
             </CardCima>
@@ -72,7 +77,6 @@ export default function PageOne(){
                         
                 )}          
             </CardBaixo>
-
 
         </Container>
     )
