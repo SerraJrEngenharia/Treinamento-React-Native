@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components/native'
 
 
@@ -12,7 +11,7 @@ export const Titulo = styled.Text`
     font-size: 30px;
     font-weight: bold;
     margin-bottom :10px;
-    margin-top: 5px;
+    margin-top: 35px;
 `
 
 export const CardTextTop = styled.View`
@@ -28,7 +27,7 @@ export const FotoSearch = styled.Image`
 
 export const CardCima = styled.View`
     width: 100%;
-    height: 120px;
+    height: 150px;
     align-items: center;
     padding: 15px;
     border-radius: 20px;

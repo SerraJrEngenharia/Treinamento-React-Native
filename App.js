@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import PageOne from "./src/Components/Pages/PageOne";
 import PageTwo from './src/Components/Pages/PageTwo';
-import Navegar from './src/Components/Pages/TabNavigator';
 
 const Tab = createBottomTabNavigator();
 
