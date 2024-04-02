@@ -71,7 +71,6 @@ export default function App() {
         )}
       </View>
       
-      
       <StatusBar style="auto" />
     </View>
   );
