@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator, FlatList, Image } from 'react-native';
 import img from "./src/assets/search.png"
 
+import PageOne from './src/Components/PageOne';
+
 export default function App() {
 
   const [artista, setArtista] = useState('')
@@ -28,51 +30,52 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}> 
+    <PageOne />
+    // <View style={styles.container}> 
 
-      <View style={[styles.card, {paddingTop: -10, borderTopLeftRadius:0, borderTopRightRadius:0}]}>
-        <Text style={styles.titulo}>App.fy</Text>
+    //   <View style={[styles.card, {paddingTop: -10, borderTopLeftRadius:0, borderTopRightRadius:0}]}>
+    //     <Text style={styles.titulo}>App.fy</Text>
 
-        <View style={{flexDirection: 'row'}}>
-          <TextInput style={styles.inputStyle} placeholder="Digite aqui" onChangeText={(text) => setInput(text)} />
-          <TouchableOpacity style={styles.botao} onPress={searchMusic}>
-            <View>
-              <Image source={img} style={styles.fotoSearch} />
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+    //     <View style={{flexDirection: 'row'}}>
+    //       <TextInput style={styles.inputStyle} placeholder="Digite aqui" onChangeText={(text) => setInput(text)} />
+    //       <TouchableOpacity style={styles.botao} onPress={searchMusic}>
+    //         <View>
+    //           <Image source={img} style={styles.fotoSearch} />
+    //         </View>
+    //       </TouchableOpacity>
+    //     </View>
+    //   </View>
 
-      <View >
-        {carregando ? <ActivityIndicator /> : (
-          <FlatList 
-            style = {styles.flatList}
-            data={dados} 
-            renderItem={({ item }) => (
+    //   <View >
+    //     {carregando ? <ActivityIndicator /> : (
+    //       <FlatList 
+    //         style = {styles.flatList}
+    //         data={dados} 
+    //         renderItem={({ item }) => (
 
-            <View style={[styles.card, {backgroundColor: '#000000', marginTop: 20}]}>
-              <Image source={{ uri: item.image }} style={styles.fotoAlbum} /> 
+    //         <View style={[styles.card, {backgroundColor: '#000000', marginTop: 20}]}>
+    //           <Image source={{ uri: item.image }} style={styles.fotoAlbum} /> 
 
-              <View>
-                <Text style={[styles.texto, {marginLeft: 17, marginTop: 12, marginBottom: 7}]}>Titulo</Text>
-                <View style={styles.cardLetra}>
-                  <Text style={[styles.texto, {color: '#ffffff', fontSize: 16}]}>{item.title}</Text>
-                </View>
+    //           <View>
+    //             <Text style={[styles.texto, {marginLeft: 17, marginTop: 12, marginBottom: 7}]}>Titulo</Text>
+    //             <View style={styles.cardLetra}>
+    //               <Text style={[styles.texto, {color: '#ffffff', fontSize: 16}]}>{item.title}</Text>
+    //             </View>
 
-                <Text style={[styles.texto, {marginLeft: 17, marginTop: 12, marginBottom: 7}]}>Letra</Text>
-                <View style={styles.cardLetra}>
-                  <Text style={[styles.texto, {color: '#ffffff', fontSize: 16}]}>{item.lyrics}</Text>
-                </View>                    
-              </View>
-            </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          /> 
-        )}
-      </View>
+    //             <Text style={[styles.texto, {marginLeft: 17, marginTop: 12, marginBottom: 7}]}>Letra</Text>
+    //             <View style={styles.cardLetra}>
+    //               <Text style={[styles.texto, {color: '#ffffff', fontSize: 16}]}>{item.lyrics}</Text>
+    //             </View>                    
+    //           </View>
+    //         </View>
+    //         )}
+    //         keyExtractor={(item, index) => index.toString()}
+    //       /> 
+    //     )}
+    //   </View>
       
-      <StatusBar style="auto" />
-    </View>
+    //   <StatusBar style="auto" />
+    // </View>
   );
 }
 
@@ -88,10 +91,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   titulo:{
-    fontSize: 30,
+    fontSize: 50,
     fontWeight: 'bold',
     marginBottom :10,
-    marginTop: 45,
+    marginTop: 15,
   },
   texto: {
     fontSize: 17,
@@ -112,7 +115,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     borderRadius: 20,
     backgroundColor: '#808080',
-    borderRadius: 10
   },
   inputStyle: {
     backgroundColor: '#ffffff',
