@@ -8,7 +8,7 @@ type CardProps = {
 
 export function Card({ title, lyric, image }: CardProps) {
     return (
-        <View className="w-full h-56 mt-20 bg-white rounded-lg items-center shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <View className="w-full h-56 mt-16 bg-white rounded-lg items-center shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             <View className="flex-row items-center p-5">
                 <Image 
                     className="w-24 h-24 rounded-lg"

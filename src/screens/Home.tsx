@@ -1,15 +1,23 @@
-import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, TouchableOpacityProps, View } from "react-native"
 import { Header } from "../components/header"
 import { Card } from "../components/card"
 import { useState } from "react"
 import { api } from "../service/api"
 
-export default function Home() {
+import { Loading } from "../components/loading"
+
+type Props = TouchableOpacityProps & {
+    isLoading?: boolean
+}
+
+export default function Home({isLoading = false, ...rest}:Props) {
 
     const [artist, setArtist] = useState("")
     const [title, setTitle] = useState("")
     const [image, setImage] = useState("")
     const [lyric, setLyric] = useState("")
+
+    const [loader, setLoader] = useState(false)
 
     async function getArtistData() {
 
@@ -17,12 +25,19 @@ export default function Home() {
             Alert.alert("Opa! Campo vazio.", "Digite um artista no espaço indicado.")
         }
 
+        
         try {
+            setLoader(true)
+            
             const response = await api.get(`/api?artist=${artist}`)
             setTitle(response.data.info.title)
             setLyric(response.data.info.lyrics)
             setImage(response.data.info.image)
+            
+            setLoader(false)
+
         } catch (error) {
+            Alert.alert("Erro!", "Não foi possível puxar os dados!")
             console.log("Algo errado. Tente novamente!")
         }
     }
@@ -35,19 +50,20 @@ export default function Home() {
             <HTextInput
                 placeholder='Digite um artista'
                 value={artist}
-                onChangeText={(e) => setArtist(e)}
+                onChangeText={setArtist}
             />
 
             <HButton 
-                onPress={getArtistData} 
+                onPress={getArtistData}
             >
                 <ButtonText>Buscar</ButtonText>
             </HButton>
 
-            {image ? (
-                <Card title={title} lyric={lyric} image={image}/>
+            {loader ? (
+                <Loading/>
+                
             ) : (
-                <View/>
+                <Card title={title} lyric={lyric} image={image}/>
             )}
 
         </HomeContainer>
@@ -67,7 +83,6 @@ const HomeContainer = styled.View`
 
 `;
 
-// w-full h-14 bg-white rounded-lg p-4 flex-row items-center gap-4 mb-4
 const HTextInput = styled.TextInput`
     width: 100%;
     height: 56px;
@@ -78,11 +93,10 @@ const HTextInput = styled.TextInput`
 `;
 
 const HButton = styled.TouchableOpacity`
-    background-color: yellow;
+    background-color: #fff;
     
-    `;
+`;
 
-// mt-4 text-lg text-yellow-700 bg-white px-8 py-2 font-bold rounded-lg hover:opacity-55 hover:duration-500 shadow-[0_3px_10px_rgb(0,0,0,0.2)]
 const ButtonText = styled.Text`
     margin-top: 8px;
     font-size: 18px;
