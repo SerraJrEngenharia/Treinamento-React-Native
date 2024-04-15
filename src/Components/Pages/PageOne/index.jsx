@@ -5,35 +5,33 @@ import img from '../../../assets/search.png'
 import { Container, Titulo, CardCima, InputStyle, FotoSearch, 
     CardTextTop, BotaoSearch, CardBaixo, FlatList, CardArtista, FotoAlbum, 
     CardLetra, TituloArtista, Texto, BotaoPagina } from './style'
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Keyboard } from 'react-native';
+
+import Api from '../../../services/api';
 
 export default function PageOne(){
 
     const [artista, setArtista] = useState('')
-    const [input, setInput] = useState('')
     const [dados, setDados] = useState([])
     const [carregando, setCarregando] = useState(false)
-
-    useEffect(() => {
+    
+    async function searchMusic(){
         if (artista !== '') {
-          setCarregando(true);
-          fetch(`https://lyric.mackle.im/api?artist=${artista}`)
-            .then((resp) => resp.json())
-            .then((json) => {
-              setDados([json.info]);
-            })
-            .catch(() => alert('Erro ao encontrar esse artista! :('))
-            .finally(() => setCarregando(false));
+                try{
+                    setCarregando(true)
+                    const response = await Api.get(`${artista}`)
+                    setDados(response.data.info)
+                    setCarregando(false)
+                }catch(error){
+                    console.log("ERRO" + error)
+                }
+        }else{
+            alert("Digita alguém ai po!")
         }
-      }, [artista]);
-
-    function searchMusic(){
-        return(
-            setArtista(input)
+        return (
+            Keyboard.dismiss()
         )
     }
-
-
 
     return(
         <Container>
@@ -43,7 +41,7 @@ export default function PageOne(){
                 </CardTextTop>
 
                 <CardTextTop>
-                    <InputStyle placeholder="Digite aqui" onChangeText={(text) => setInput(text)}/>
+                    <InputStyle placeholder="Digite aqui" onChangeText={(text) => setArtista(text)}/>
                     <BotaoSearch onPress={searchMusic}>
                         <FotoSearch source={img}/>
                     </BotaoSearch>
@@ -52,30 +50,21 @@ export default function PageOne(){
             </CardCima>
             
             <CardBaixo>
+                {carregando ? <ActivityIndicator /> : 
+                    <CardArtista>
+                        <FotoAlbum source={{ uri: dados.image }}/>
+                                    
+                        <TituloArtista>Titulo</TituloArtista>
+                        <CardLetra>
+                            <Texto>{ dados.title }</Texto>
+                        </CardLetra>
 
-                {carregando ? <ActivityIndicator /> : (
-                <FlatList 
-                    data={dados}
-                    renderItem={({item}) => (
-                        <CardArtista>
-                            <FotoAlbum source={{ uri: item.image }}/>
-                                
-                                
-                            <TituloArtista>Titulo</TituloArtista>
-                            <CardLetra>
-                                <Texto>{ item.title }</Texto>
-                            </CardLetra>
-
-                            <TituloArtista>Letra</TituloArtista>
-                            <CardLetra>
-                            <Texto>{ item.lyrics }</Texto>
-                            </CardLetra>
-                            
-                        </CardArtista>
-                    )}
-                />
-                        
-                )}          
+                        <TituloArtista>Letra</TituloArtista>
+                        <CardLetra>
+                        <Texto>{ dados.lyrics }</Texto>
+                        </CardLetra>
+                    </CardArtista>
+                }
             </CardBaixo>
 
         </Container>
