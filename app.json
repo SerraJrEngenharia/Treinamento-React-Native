@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "random-song-lyric-native",
-    "slug": "random-song-lyric-native",
+    "name": "RN Serra Jr.",
+    "slug": "rn-serra-jr",
+    "description": "Treinamento de React Native da Serra Jr. Engenharia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,17 +16,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gabs12.rnserrajr"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.gabs12.rnserrajr"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a19b6d92-68b3-4046-94ea-800bccd7cca9"
+      }
     }
   }
 }
