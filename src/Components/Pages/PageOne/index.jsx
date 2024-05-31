@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import img from '../../../assets/search.png'
+import LottieView from 'lottie-react-native';
 
 
 import { Container, Titulo, CardCima, InputStyle, FotoSearch, 
@@ -50,8 +51,17 @@ export default function PageOne(){
             </CardCima>
             
             <CardBaixo>
-                {carregando ? <ActivityIndicator /> : 
-                    <CardArtista>
+                {carregando ?
+                <LottieView
+                    autoPlay
+                    style={{
+                        width: 450,
+                        height: 450,
+                    }}
+                    source={require('../../../assets/loading.json')}
+                />
+                
+                 :<CardArtista>
                         <FotoAlbum source={{ uri: dados.image }}/>
                                     
                         <TituloArtista>Titulo</TituloArtista>

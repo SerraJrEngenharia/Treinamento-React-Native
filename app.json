@@ -1,13 +1,14 @@
 {
   "expo": {
-    "name": "Segundoo",
-    "slug": "Segundoo",
+    "name": "Appfy",
+    "slug": "appfy",
+    "description": "Este é um app para gerar uma letra e música aleatória a partir do cantor.",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appfy-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/appfy-capa.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -15,16 +16,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.guxtavu.appfy"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.guxta_curty.appfy"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fd36d23b-c4b8-47b1-997b-94130d3b017f"
+      }
     }
   }
 }
